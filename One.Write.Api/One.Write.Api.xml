@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>One.Write.Api</name>
+    </assembly>
+    <members>
+        <member name="T:One.Write.Api.Controllers.WriteController">
+            <summary>
+            Write Controller
+            </summary>
+        </member>
+        <member name="M:One.Write.Api.Controllers.WriteController.Post">
+            <summary>
+            Post endpoint for Write Controller
+            </summary>
+            <returns>Message string</returns>
+        </member>
+    </members>
+</doc>

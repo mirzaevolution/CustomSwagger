@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>One.Read.Api</name>
+    </assembly>
+    <members>
+        <member name="T:One.Read.Api.Controllers.ReadController">
+            <summary>
+            Read controller
+            </summary>
+        </member>
+        <member name="M:One.Read.Api.Controllers.ReadController.Get">
+            <summary>
+            Get endpoint for Read controller
+            </summary>
+            <returns>Message string</returns>
+        </member>
+    </members>
+</doc>

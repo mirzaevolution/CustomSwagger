@@ -1,0 +1,55 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Read",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/Read",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "read"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Write",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/Write",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "write"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "read",
+      "Config": [
+        {
+          "Name": "Read Api",
+          "Version": "v1",
+          "Url": "https://localhost:5001/OneApi/Read/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "write",
+      "Config": [
+        {
+          "Name": "Write Api",
+          "Version": "v1",
+          "Url": "https://localhost:5002/OneApi/Write/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5003"
+  }
+}
