@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace One.Write.Api.Controllers
 {
@@ -7,6 +9,7 @@ namespace One.Write.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WriteController : ControllerBase
     {
         /// <summary>
@@ -18,7 +21,42 @@ namespace One.Write.Api.Controllers
         {
             return Ok(new
             {
-                message = "Write"
+                message = "Write",
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
+            });
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult Post(string id)
+        {
+            return Ok(new
+            {
+                message = "Write",
+                paramId = id,
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
+            });
+        }
+
+        [HttpPost("{id}/{name}")]
+        public IActionResult Post(string id, string name)
+        {
+            return Ok(new
+            {
+                message = "Write",
+                parameters = new string[] { id, name },
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
             });
         }
     }

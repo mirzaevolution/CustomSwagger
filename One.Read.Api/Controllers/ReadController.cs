@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace One.Read.Api.Controllers
 {
@@ -7,6 +9,7 @@ namespace One.Read.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReadController : ControllerBase
     {
         /// <summary>
@@ -18,8 +21,45 @@ namespace One.Read.Api.Controllers
         {
             return Ok(new
             {
-                message = "Read"
+                message = "Read",
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
             });
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
+        {
+            return Ok(new
+            {
+                message = "Read",
+                paramId = id,
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
+            });
+        }
+
+        [HttpGet("{id}/{name}")]
+        public IActionResult Get(string id, string name)
+        {
+            return Ok(new
+            {
+                message = "Read",
+                parameters = new string[] { id, name },
+                userInfo = new
+                {
+                    username = User.Identity.Name,
+                    emal = User.FindFirstValue("email")
+                }
+            });
+        }
+
+
     }
 }

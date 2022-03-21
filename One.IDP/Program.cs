@@ -3,6 +3,7 @@
 
 
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -52,6 +53,15 @@ namespace One.IDP
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
+                 .ConfigureAppConfiguration((hostingContext, config) =>
+                 {
+                     config
+                         .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                         .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
+                             optional: true, reloadOnChange: true)
+                         .AddEnvironmentVariables();
+                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
