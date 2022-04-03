@@ -70,6 +70,7 @@ namespace One.Read.Api
                    options.TokenValidationParameters.NameClaimType = "name";
                    options.TokenValidationParameters.RoleClaimType = "role";
                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -23,6 +23,7 @@ namespace One.IDP
             {
                 new ApiScope("One.Read"),
                 new ApiScope("One.Write"),
+                new ApiScope("Day1Lab.FullAccess")
             };
 
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
@@ -33,6 +34,18 @@ namespace One.IDP
                 {
                     "One.Read",
                     "One.Write"
+                },
+                UserClaims =
+                {
+                    "name",
+                    "email"
+                }
+            },
+             new ApiResource("Day1Lab.Template","Day1Lab Template Apis")
+            {
+                Scopes =
+                {
+                    "Day1Lab.FullAccess"
                 },
                 UserClaims =
                 {
@@ -68,6 +81,29 @@ namespace One.IDP
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "email","One.Read","One.Write","offline_access" }
+                },
+                new Client
+                {
+                    ClientId = "Day1Lab.Template",
+                    ClientSecrets = { new Secret("5cea305b-406e-4b75-a7c9-260d6fac6d6a".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.Code,
+
+                    RedirectUris = {
+                        $"{configuration["Endpoints:Day1LabCommandApi"]}/swagger/oauth2-redirect.html",
+                        $"{configuration["Endpoints:Day1LabQueryApi"]}/swagger/oauth2-redirect.html",
+                        $"{configuration["Endpoints:Day1LabGateway"]}/swagger/oauth2-redirect.html"
+
+                    },
+                     AllowedCorsOrigins =
+                    {
+                        configuration["Endpoints:Day1LabCommandApi"],
+                        configuration["Endpoints:Day1LabQueryApi"],
+                        configuration["Endpoints:Day1LabGateway"]
+                    },
+
+                    AllowOfflineAccess = true,
+                    AllowedScopes = { "openid", "profile", "email", "Day1Lab.FullAccess", "offline_access" }
                 },
             };
     }
